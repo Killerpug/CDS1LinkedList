@@ -25,3 +25,8 @@ Node* add_node(Node *node){      //Adds a node to the list
     return node;
 }
 
+Node* add_new(int d){
+    Node *new_node = create_node(d);
+    return add_node(new_node);
+}
+
