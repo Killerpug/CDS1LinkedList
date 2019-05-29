@@ -5,12 +5,13 @@
 #ifndef CDS1LINKEDLIST_LINKED_LIST_H
 #define CDS1LINKEDLIST_LINKED_LIST_H
 
-
+typedef int T;
     typedef struct Node{
-        int data;
+        T data;
         struct Node *next_node;
     }Node;
 
-    Node* create_node(int n, Node* next_node);      //create a new node with data, ref to next node, returns the pointer to mem loc.
+    Node* create_node(int d);      //create a new node with data, ref to next node, returns the pointer to mem loc.
+    Node* add_node(Node *node);
 
 #endif //CDS1LINKEDLIST_LINKED_LIST_H
