@@ -45,3 +45,8 @@ void remove_node(Node *node){
     else printf("node not found");
 }
 
+Node* add_new(int d){
+    Node *new_node = create_node(d);
+    return add_node(new_node);
+}
+
