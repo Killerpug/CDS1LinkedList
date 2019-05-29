@@ -26,18 +26,18 @@ Node* add_node(Node *node){      //Adds a node to the list
     return node;
 }
 void remove_node(Node *node){
-    if(node == head) {
+    if(node == head) {              //case node is the head
         head = head->next_node;
         free(node);
         return;
     }
     Node* search = head;
     Node * previous = NULL;
-    while ( search != node && (search -> next_node) != NULL){
+    while ( search != node && (search -> next_node) != NULL){       //iterate to find node
         previous = search;
         search = search -> next_node;
     }
-    if (node == search) {
+    if (node == search) {           //match found
         previous -> next_node = search -> next_node;
         printf("You have erased: %i", search->data);
         free(search);
