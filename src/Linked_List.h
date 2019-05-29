@@ -13,5 +13,6 @@ typedef int T;
 
     Node* create_node(int d);      //create a new node with data, ref to next node, returns the pointer to mem loc.
     Node* add_node(Node *node);
+    void remove_node(Node *node);
 
 #endif //CDS1LINKEDLIST_LINKED_LIST_H
