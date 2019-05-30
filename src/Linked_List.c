@@ -5,6 +5,8 @@
 #include <malloc.h>
 #include "Linked_List.h"
 #include <stdio.h>
+#include <stdbool.h>
+
 List* create_list(){
     List *new_list = (List*)malloc(sizeof(List));       //reserve enough space for List structure
     new_list -> head = NULL;
@@ -33,7 +35,10 @@ Node* add_node(Node *node, List *list){                  //Adds a node to the li
     }
     return node;
 }
-
+Node* add_new_node(T item, List *list){                  //create and add a node to a list
+    Node *new_node = create_node(item);              //create
+    return add_node(new_node, list);                 //add
+}
 void remove_node(T item, List *list, erase type_of_deletion){
     if(item == list -> head -> data) {                                   //case node is the head
         list -> size--;
@@ -49,12 +54,12 @@ void remove_node(T item, List *list, erase type_of_deletion){
         previous = search;
         search = search -> next_node;
     }
-    if(search->data == item){                                           //match found, erase node
+    if(compare_items(search->data, item)){                                           //match found, erase node
         list -> size--;
         previous -> next_node = search -> next_node;
         printf("You have erased: %i \n", search -> data);
         free(search);
-        if(type_of_deletion)        //deletes all the coincidences
+        if(type_of_deletion == ALL)        //deletes all the coincidences
             remove_node(item, list, ALL);
     }
     else printf("No more nodes found\n");
@@ -64,12 +69,27 @@ Node* search_node(T item, List *list){                       //returns node with
     while ( search -> data != item && (search -> next_node) != NULL){       //iterate to find node to erase
         search = search -> next_node;
     }
-    if( search->data == item) return search;
+    if(compare_items(search->data, item)) return search;
     else return NULL;
 }
-
-Node* add_new( T item, List *list){                  //create and add a node to a list
-    Node *new_node = create_node(item);              //create
-    return add_node(new_node, list);                 //add
+bool compare_items(T item1, T item2) {
+    return (item1 == item2);
 }
+void reverse_list(List *list){
 
+    Node *new_ref = list->head->next_node;                 //save left node list
+    list->head->next_node = NULL;            // last element
+    for (int i = 1; i < (list->size) ; ++i) {
+        Node *temp = list -> head;          //add node, new head
+        list -> head = new_ref;
+        new_ref = new_ref->next_node;       //update left list of nodes
+        list->head->next_node = temp;       //reverse position
+    }
+}
+void print_list(List *list){
+    Node *next = list -> head;
+    for (int i = 1; i <= list -> size; ++i) {
+        printf("element %i: %i \n",i ,next -> data);
+        next = next -> next_node;
+    }
+}
