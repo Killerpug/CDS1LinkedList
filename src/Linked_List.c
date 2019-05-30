@@ -41,11 +41,9 @@ Node* add_new_node(T item, List *list){                  //create and add a node
 }
 void remove_node(T item, List *list, erase type_of_deletion){
     if(item == list -> head -> data) {                                   //case node is the head
-        list -> size--;
         Node *remove = list -> head;
         list -> head = list -> head->next_node;                         //change head
-        printf("You have erased: %i \n", remove -> data);
-        free(remove);
+        private_remove_adjust(remove, list, type_of_deletion);
         return;
     }
     Node *search = list -> head;
@@ -55,14 +53,17 @@ void remove_node(T item, List *list, erase type_of_deletion){
         search = search -> next_node;
     }
     if(compare_items(search->data, item)){                                           //match found, erase node
-        list -> size--;
-        previous -> next_node = search -> next_node;
-        printf("You have erased: %i \n", search -> data);
-        free(search);
-        if(type_of_deletion == ALL)        //deletes all the coincidences
-            remove_node(item, list, ALL);
+        previous -> next_node = search -> next_node;                //delete reference from previous node
+        private_remove_adjust(search, list, type_of_deletion);
     }
     else printf("No more nodes found\n");
+}
+void private_remove_adjust(Node *remove, List *list, erase type){
+    list -> size--;
+    printf("You have erased: %i \n", remove -> data);
+    if(type == ALL)        //deletes all the coincidences
+        remove_node(remove -> data, list, ALL);
+    free(remove);
 }
 Node* search_node(T item, List *list){                       //returns node with item if found or NULL if not found
     Node* search = list -> head;
@@ -76,14 +77,13 @@ bool compare_items(T item1, T item2) {
     return (item1 == item2);
 }
 void reverse_list(List *list){
-
     Node *new_ref = list->head->next_node;                 //save left node list
-    list->head->next_node = NULL;            // last element
+    list->head->next_node = NULL;                         // last element on reversed list
     for (int i = 1; i < (list->size) ; ++i) {
-        Node *temp = list -> head;          //add node, new head
+        Node *temp = list -> head;                       //add node, new head
         list -> head = new_ref;
-        new_ref = new_ref->next_node;       //update left list of nodes
-        list->head->next_node = temp;       //reverse position
+        new_ref = new_ref->next_node;                    //update left list of nodes
+        list->head->next_node = temp;                     //reverse position
     }
 }
 void print_list(List *list){

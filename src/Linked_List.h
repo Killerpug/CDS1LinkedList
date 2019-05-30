@@ -18,7 +18,7 @@ typedef struct List{
     int size;
 }List;
 
-typedef enum {
+typedef enum {                   //option to erase the coincidences of an item, just the FIRST one/ or ALL matches found.
     FIRST, ALL
 }erase;
 
@@ -32,5 +32,5 @@ List* create_list();                      //create the List that stores nodes
 void delete_list(List *list);
 void reverse_list(List *list);
 void print_list(List *list);
-
+void private_remove_adjust(Node *remove,List *list, erase type);       //adjust size, memory space, recurrent deletion
 #endif //CDS1LINKEDLIST_LINKED_LIST_H
