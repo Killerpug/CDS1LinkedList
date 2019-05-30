@@ -6,19 +6,26 @@
 #define CDS1LINKEDLIST_LINKED_LIST_H
 //to change type of data just change type of T
 typedef int T;
-    typedef struct Node{
-        T data;
-        struct Node *next_node;
-    }Node;
+typedef struct Node{
+    T data;
+    struct Node *next_node;
+}Node;
 
-    typedef struct List{
-        struct Node *head;
-    }List;
+typedef struct List{
+    char name[15];
+    struct Node *head;
+    int size;
+}List;
 
-    Node* create_node(int d);                 //create a new node with data, ref to next node, returns the pointer to mem loc.
-    Node* add_node(Node *node, List *list);
-    Node* add_new(int d, List *list);
-    void remove_node(Node *node, List *list);
-    List* create_list();                      //create the List that stores nodes
-    void delete_list(List *list);
+typedef enum {
+    FIRST, ALL
+}erase;
+
+Node* create_node(T item);                 //create a new node with data, ref to next node, returns the pointer to mem loc.
+Node* add_node(Node *node, List *list);
+Node* add_new(T item, List *list);
+void remove_node(T item, List *list, erase type_of_deletion);
+Node* search_node(T item, List *list);
+List* create_list();                      //create the List that stores nodes
+void delete_list(List *list);
 #endif //CDS1LINKEDLIST_LINKED_LIST_H
