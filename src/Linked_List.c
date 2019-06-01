@@ -51,6 +51,7 @@ Node* add_new_node(T item, List* list) {                  //create and add a nod
 }
 
 void remove_node(T item, List* list, Erase type_of_deletion) {
+    if(list->size == 0) return;
     if(item == list->head->data) {                                   //case node is the head
         Node* remove = list->head;
         list->head = list->head->next_node;                         //change head
