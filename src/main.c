@@ -17,11 +17,10 @@ int main() {
     print_list(list2);
     reverse_list(list2);
     print_list(list2);
-    remove_node(2, list1, ALL);
-
+    remove_node(2, list1, FIRST);
 
     delete_list(list1);
     delete_list(list2);
-    return 0;
 
+    return 0;
 }
