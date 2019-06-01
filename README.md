@@ -1,6 +1,6 @@
 # CDS1LinkedList
-First Data Structure, a Linked List based on pointers
-Methods
+First Data Structure on C, a Linked List with dynamic memory (based on pointers).
+Methods:
 Node* create_node (T item);                 //creates a new node with data, ref to next node, returns the pointer to mem loc.
 Node* add_node (Node *node, List *list);
 Node* add_new_node (T item, List *list);
