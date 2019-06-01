@@ -12,7 +12,7 @@ int main() {
         delete_list(i);
     }
     List* list4 = create_list();
-    add_new_node(2, list4);
+    add_new_node(4, list3);
     add_new_node(2, list4);
     add_new_node(2, list1);
     add_new_node(2, list1);
@@ -27,6 +27,7 @@ int main() {
     reverse_list(list2);
     print_list(list2);
     remove_node(2, list1, FIRST);
+    remove_node(2, list3, FIRST);
 
     delete_list(list1);
     delete_list(list2);
