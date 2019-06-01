@@ -5,6 +5,12 @@ int main() {
     List* list1 = create_list();
     List* list2 = create_list();
     List* list3 = create_list();
+    for (int i = 0; i < 100; ++i) {
+        List* i = create_list();
+        add_new_node(2, i);
+        add_new_node(2, i);
+        delete_list(i);
+    }
     List* list4 = create_list();
     add_new_node(2, list4);
     add_new_node(2, list4);

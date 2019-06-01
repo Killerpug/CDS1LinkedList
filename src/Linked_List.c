@@ -13,10 +13,11 @@ List* create_list() {
     new_list->size = 0;
     return new_list;
 }
-void delete_list(List *list) {
+
+void delete_list(List* list) {
     Node* next_deletion = list->head;
     Node* delete = NULL;
-    while (next_deletion != NULL) {               //free memory used by nodes
+    while (next_deletion != NULL) {               //free memory used by nodes on list
         delete = next_deletion;
         next_deletion = next_deletion->next_node;
         free(delete);
@@ -24,15 +25,17 @@ void delete_list(List *list) {
     free(list);
     printf("deleted \n");
 }
-Node* create_node(T item ) {
+
+Node* create_node(T item) {
     Node* new_node = (Node*) malloc(sizeof(Node));   //cast to assure same pointer type
     new_node->next_node = NULL;
     new_node->data = item;
     return new_node;
 }
-Node* add_node(Node *node, List *list) {                  //Adds a node to the list
+
+Node* add_node(Node* node, List* list) {                  //Adds a node to the list
     list->size++;
-    if(list-> head == NULL){                               //if empty list, node is head
+    if(list->head == NULL){                               //if empty list, node is head
         list->head = node;
     } else {                                              //Add node, new head
        Node* temp = list->head;
@@ -41,10 +44,12 @@ Node* add_node(Node *node, List *list) {                  //Adds a node to the l
     }
     return node;
 }
+
 Node* add_new_node(T item, List* list) {                  //create and add a node to a list
     Node* new_node = create_node(item);              //create
     return add_node(new_node, list);                 //add
 }
+
 void remove_node(T item, List* list, Erase type_of_deletion) {
     if(item == list->head->data) {                                   //case node is the head
         Node *remove = list->head;
@@ -52,10 +57,9 @@ void remove_node(T item, List* list, Erase type_of_deletion) {
         private_remove_adjust(remove, list, type_of_deletion);
         return;
     }
-    Node *search = list -> head;
-    Node *previous = NULL;
-    //invert order
-    while ( (search->data != item) && (search->next_node) != NULL) {       //iterate to find node to Erase while list have isnt empty
+    Node* search = list->head;
+    Node* previous = NULL;
+    while ( (search->next_node) != NULL && (search->data != item) ) {       //iterate to find node to Erase while list have isnt empty
         previous = search;
         search = search->next_node;
     }
@@ -65,6 +69,7 @@ void remove_node(T item, List* list, Erase type_of_deletion) {
     }
     else printf("No more nodes found\n");
 }
+
 void private_remove_adjust(Node* remove, List* list, Erase type) {
     list->size--;
     printf("You have erased: %i \n", remove->data);
@@ -72,16 +77,19 @@ void private_remove_adjust(Node* remove, List* list, Erase type) {
         remove_node(remove->data, list, ALL);
     free(remove);
 }
+
 Node* search_node(T item, List* list) {                       //returns node with item if found or NULL if not found
-    Node* search = list -> head;
-    while ( (search->data != item) && (search->next_node) != NULL) {       //iterate to find node to Erase
+    Node* search = list->head;
+    while ( (search->next_node) != NULL && (search->data != item) ) {       //iterate to find node to Erase
         search = search->next_node;
     }
-    return compare_items(search->data, item) ? search : NULL;
+    return (search->data == item) ? search : NULL;           //compare_items inline
 }
+
 bool compare_items(T item1, T item2) {
     return (item1 == item2);
 }
+
 void reverse_list(List *list) {
     Node* new_ref = list->head->next_node;                 //save left node list
     list->head->next_node = NULL;                         // last element on reversed list
@@ -92,10 +100,11 @@ void reverse_list(List *list) {
         list->head->next_node = temp;                     //reverse position
     }
 }
+
 void print_list(List *list) {
     Node* next = list->head;
     for (int i = 1; i <= list->size; ++i) {
-        printf("element %i: %i \n",i ,next->data);
+        printf("element %i: %i \n", i, next->data);
         next = next->next_node;
     }
 }
